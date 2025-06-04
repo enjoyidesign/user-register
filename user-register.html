@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公益家具再利用平台 會員註冊表單</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #45a049;
+            --accent-color: #f8f9fa;
+            --border-color: #ddd;
+            --text-color: #333;
+            --light-text: #666;
+            --section-border-color: #4472c4;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: '微軟正黑體', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f0f7fa;
+            padding: 20px;
+            background-image: url('https://ap11.ragic.com/sims/file.jsp?a=joycehuang&f=R30VLnrZjY%40funiture-2%20(1600%20x%20900%20%E5%83%8F%E7%B4%A0).svg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--light-text);
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--section-border-color);
+            padding-bottom: 10px;
+            margin: 25px 0 15px;
+            font-size: 20px;
+            position: relative;
+        }
+        
+        h2::before {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background-color: var(--section-border-color);
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+            margin-top: 20px;
+        }
+        
+        .divider {
+            height: 20px;
+            background-color: transparent;
+            margin: 10px 0;
+            position: relative;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus,
+        input[type="tel"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+        
+        input[readonly] {
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+        }
+        
+        .required::after {
+            content: "*";
+            color: red;
+            margin-left: 4px;
+        }
+        
+        .file-upload {
+            border: 2px dashed var(--border-color);
+            padding: 20px;
+            text-align: center;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .file-upload p {
+            margin-bottom: 10px;
+            color: var(--light-text);
+        }
+        
+        .info-text {
+            background-color: var(--accent-color);
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .info-note {
+            color: var(--light-text);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        button {
+            background-color: #4472c4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #3a63ad;
+        }
+        
+        .submit-button {
+            background-color: #4472c4;
+            color: white;
+            width: 180px;
+            display: block;
+            margin: 20px auto;
+        }
+        
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+        
+        .col-half {
+            flex: 0 0 50%;
+            padding: 0 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .col-half {
+                flex: 0 0 100%;
+            }
+        }
+        
+        .radio-group {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .radio-option {
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .radio-option input[type="radio"] {
+            margin-right: 8px;
+        }
+        
+        .file-preview {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            background-color: var(--accent-color);
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .file-preview .file-name {
+            flex-grow: 1;
+            margin-right: 10px;
+            word-break: break-word;
+        }
+        
+        .file-preview .remove-file {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .hidden-section {
+            display: none;
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--light-text);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>公益家具再利用平台 會員註冊表單</h1>
+        <div class="subtitle">成為會員，共同參與家具資源的永續循環</div>
+        
+        <form id="memberForm" method="POST">
+            <div class="form-section">
+                <h2>基本資料</h2>
+                
+                <div class="row">
+                    <div class="form-group col-half">
+                        <label for="name" class="required">姓名</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group col-half">
+                        <label for="phone" class="required">連絡電話</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="form-group col-half">
+                        <label for="email" class="required">E-mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group col-half">
+                        <label for="lineId">LINE ID</label>
+                        <input type="text" id="lineId" name="lineId" readonly placeholder="(系統自動帶出)">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="city" class="required">所在地縣市</label>
+                    <select id="city" name="city" required>
+                        <option value="" disabled selected>請選擇縣市</option>
+                        <option value="taipei">台北市</option>
+                        <option value="newtaipei">新北市</option>
+                        <option value="taoyuan">桃園市</option>
+                        <option value="taichung">台中市</option>
+                        <option value="tainan">台南市</option>
+                        <option value="kaohsiung">高雄市</option>
+                        <option value="hsinchu_city">新竹市</option>
+                        <option value="hsinchu_county">新竹縣</option>
+                        <option value="miaoli">苗栗縣</option>
+                        <option value="changhua">彰化縣</option>
+                        <option value="nantou">南投縣</option>
+                        <option value="yunlin">雲林縣</option>
+                        <option value="chiayi_city">嘉義市</option>
+                        <option value="chiayi_county">嘉義縣</option>
+                        <option value="pingtung">屏東縣</option>
+                        <option value="yilan">宜蘭縣</option>
+                        <option value="hualien">花蓮縣</option>
+                        <option value="taitung">台東縣</option>
+                        <option value="penghu">澎湖縣</option>
+                        <option value="kinmen">金門縣</option>
+                        <option value="lienchiang">連江縣</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="isCharityOrganization" class="required">是否為公益單位</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="isCharityYes" name="isCharityOrganization" value="yes">
+                            <label for="isCharityYes">是</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="isCharityNo" name="isCharityOrganization" value="no" checked>
+                            <label for="isCharityNo">否</label>
+                        </div>
+                    </div>
+                    <div class="info-note">
+                        註：公益單位可以在第一領取時間優先領取家具
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section hidden-section" id="charitySection">
+                <h2>公益單位資料</h2>
+                
+                <div class="form-group">
+                    <label for="charityName" class="required">公益單位名稱</label>
+                    <input type="text" id="charityName" name="charityName">
+                </div>
+                
+                <div class="form-group">
+                    <label for="taxId" class="required">統一編號</label>
+                    <input type="text" id="taxId" name="taxId" maxlength="8" pattern="[0-9]{8}">
+                    <div class="info-note">請輸入8位數字的統一編號</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="certificate" class="required">證明文件上傳</label>
+                    <div class="file-upload">
+                        <p>請上傳公益單位證明文件（支援JPG/PNG/PDF/DOC/DOCX格式，最大10MB）</p>
+                        <p>如有多個文件，請合併成一個檔案後上傳</p>
+                        <input type="file" id="certificate" name="certificate" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
+                        <div id="filePreview" class="file-preview">
+                            <div class="file-name" id="fileName"></div>
+                            <button type="button" class="remove-file" id="removeFile">移除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-button">提交註冊資料</button>
+            
+            <div class="form-footer">
+                <p>所有標記有 * 符號的欄位均為必填項目</p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 處理公益單位相關欄位的顯示/隱藏
+            const isCharityYes = document.getElementById('isCharityYes');
+            const isCharityNo = document.getElementById('isCharityNo');
+            const charitySection = document.getElementById('charitySection');
+            const charityRequiredFields = charitySection.querySelectorAll('input[type="text"], input[type="file"]');
+            
+            function toggleCharitySection() {
+                if (isCharityYes.checked) {
+                    charitySection.classList.remove('hidden-section');
+                    // 啟用必填驗證
+                    charityRequiredFields.forEach(field => {
+                        field.required = true;
+                    });
+                } else {
+                    charitySection.classList.add('hidden-section');
+                    // 停用必填驗證
+                    charityRequiredFields.forEach(field => {
+                        field.required = false;
+                    });
+                }
+            }
+            
+            isCharityYes.addEventListener('change', toggleCharitySection);
+            isCharityNo.addEventListener('change', toggleCharitySection);
+            
+            // 初始狀態檢查
+            toggleCharitySection();
+            
+            // 城市選擇後自動預填詳細地址（如果有地址欄位的話）
+            const citySelect = document.getElementById('city');
+            
+            // 中文縣市名稱對照表
+            const cityNames = {
+                'taipei': '台北市',
+                'newtaipei': '新北市',
+                'taoyuan': '桃園市',
+                'taichung': '台中市',
+                'tainan': '台南市',
+                'kaohsiung': '高雄市',
+                'hsinchu_city': '新竹市',
+                'hsinchu_county': '新竹縣',
+                'miaoli': '苗栗縣',
+                'changhua': '彰化縣',
+                'nantou': '南投縣',
+                'yunlin': '雲林縣',
+                'chiayi_city': '嘉義市',
+                'chiayi_county': '嘉義縣',
+                'pingtung': '屏東縣',
+                'yilan': '宜蘭縣',
+                'hualien': '花蓮縣',
+                'taitung': '台東縣',
+                'penghu': '澎湖縣',
+                'kinmen': '金門縣',
+                'lienchiang': '連江縣'
+            };
+            
+            // 檔案上傳預覽
+            const certificateInput = document.getElementById('certificate');
+            const filePreview = document.getElementById('filePreview');
+            const fileName = document.getElementById('fileName');
+            const removeFile = document.getElementById('removeFile');
+            const maxFileSize = 10 * 1024 * 1024; // 10MB
+            
+            certificateInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    const file = this.files[0];
+                    
+                    // 檢查檔案大小
+                    if (file.size > maxFileSize) {
+                        alert('檔案大小超過10MB限制！');
+                        this.value = '';
+                        filePreview.style.display = 'none';
+                        return;
+                    }
+                    
+                    // 檢查檔案類型
+                    const fileExtension = file.name.split('.').pop().toLowerCase();
+                    const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx'];
+                    
+                    if (!allowedExtensions.includes(fileExtension)) {
+                        alert('不支援的檔案格式！請上傳JPG、PNG、PDF或Word檔案。');
+                        this.value = '';
+                        filePreview.style.display = 'none';
+                        return;
+                    }
+                    
+                    // 顯示檔案名稱
+                    fileName.textContent = file.name;
+                    filePreview.style.display = 'flex';
+                } else {
+                    filePreview.style.display = 'none';
+                }
+            });
+            
+            removeFile.addEventListener('click', function() {
+                certificateInput.value = '';
+                filePreview.style.display = 'none';
+            });
+            
+            // URL參數預填功能
+            const fillFormFromUrl = function() {
+                const params = new URLSearchParams(window.location.search);
+                
+                // 遍歷表單中的所有input、select元素
+                document.querySelectorAll('#memberForm input:not([type="file"]), #memberForm select').forEach(element => {
+                    const paramValue = params.get(element.name);
+                    if (paramValue) {
+                        // 對於lineId欄位，即使是唯讀也允許通過URL設置
+                        if (element.id === 'lineId') {
+                            element.value = paramValue;
+                        } 
+                        // 對於單選按鈕
+                        else if (element.type === 'radio') {
+                            if (element.value === paramValue) {
+                                element.checked = true;
+                                if (element.name === 'isCharityOrganization') {
+                                    toggleCharitySection();
+                                }
+                            }
+                        }
+                        // 其他唯讀欄位不允許通過URL設置
+                        else if (!element.hasAttribute('readonly')) {
+                            element.value = paramValue;
+                            
+                            // 觸發select的change事件以處理相依欄位
+                            if (element.tagName === 'SELECT') {
+                                const event = new Event('change');
+                                element.dispatchEvent(event);
+                            }
+                        }
+                    }
+                });
+            };
+            
+            fillFormFromUrl();
+            
+            // 表單提交處理
+            document.getElementById('memberForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 創建FormData物件
+                const formData = new FormData(this);
+                
+                // 中文對照表 - 縣市
+                const cityNames = {
+                    'taipei': '台北市',
+                    'newtaipei': '新北市',
+                    'taoyuan': '桃園市',
+                    'taichung': '台中市',
+                    'tainan': '台南市',
+                    'kaohsiung': '高雄市',
+                    'hsinchu_city': '新竹市',
+                    'hsinchu_county': '新竹縣',
+                    'miaoli': '苗栗縣',
+                    'changhua': '彰化縣',
+                    'nantou': '南投縣',
+                    'yunlin': '雲林縣',
+                    'chiayi_city': '嘉義市',
+                    'chiayi_county': '嘉義縣',
+                    'pingtung': '屏東縣',
+                    'yilan': '宜蘭縣',
+                    'hualien': '花蓮縣',
+                    'taitung': '台東縣',
+                    'penghu': '澎湖縣',
+                    'kinmen': '金門縣',
+                    'lienchiang': '連江縣'
+                };
+                
+                // 替換單選按鈕值為中文
+                if (formData.get('isCharityOrganization') === 'yes') {
+                    formData.set('isCharityOrganization', '是');
+                } else if (formData.get('isCharityOrganization') === 'no') {
+                    formData.set('isCharityOrganization', '否');
+                }
+                
+                // 替換縣市選項值為中文
+                if (formData.get('city') && cityNames[formData.get('city')]) {
+                    formData.set('city', cityNames[formData.get('city')]);
+                }
+                
+                // 使用Fetch API提交表單到webhook
+                fetch('https://hook.us1.make.com/wiz0ir3kxh74g7i2taryck5sx41tynly', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    // 檢查回應是否成功
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error('網絡回應不是成功的');
+                })
+                .then(data => {
+                    console.log('提交成功:', data);
+                    
+                    // 隱藏表單，顯示成功訊息
+                    const formContainer = document.querySelector('.container');
+                    formContainer.innerHTML = `
+                        <div class="success-message" style="text-align: center; padding: 50px 20px;">
+                            <h2 style="color: var(--primary-color); margin-bottom: 20px;">感謝！已收到您提交的資訊。</h2>
+                            <p>我們將盡快處理您的會員註冊申請。</p>
+                        </div>
+                    `;
+                    
+                    // 滾動到頁面頂部
+                    window.scrollTo(0, 0);
+                })
+                .catch(error => {
+                    console.error('提交失敗:', error);
+                    alert('提交時發生錯誤，請稍後再試。如果問題持續存在，請聯繫我們的支援團隊。');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
