@@ -189,6 +189,11 @@
             margin: 20px auto;
         }
         
+        .submit-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
         .row {
             display: flex;
             flex-wrap: wrap;
@@ -256,6 +261,52 @@
             margin-top: 20px;
             font-size: 14px;
             color: var(--light-text);
+        }
+        
+        /* 用戶規約樣式 */
+        .terms-section {
+            background-color: #f9f9f9;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .terms-content {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .terms-content ol {
+            padding-left: 20px;
+        }
+        
+        .terms-content li {
+            margin-bottom: 12px;
+        }
+        
+        .terms-agreement {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 15px;
+        }
+        
+        .terms-agreement input[type="checkbox"] {
+            margin-right: 10px;
+            margin-top: 2px;
+        }
+        
+        .terms-agreement label {
+            font-weight: normal;
+            margin-bottom: 0;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -366,7 +417,28 @@
                 </div>
             </div>
             
-            <button type="submit" class="submit-button">提交註冊資料</button>
+            <!-- 用戶基本規約區塊 -->
+            <div class="form-section">
+                <h2>用戶基本規約</h2>
+                
+                <div class="terms-section">
+                    <div class="terms-content">
+                        <ol>
+                            <li>登錄本平台之用戶資訊，僅供平台本身使用，也就是家具相關物資的供應、媒合、取件、使用管理、用戶行為研究，不做其他利用。</li>
+                            <li>本平台有公益優先機制，若為登記立案合法的公益單位，視為具有優先預約取件的資格。</li>
+                            <li>用戶經預約取件，請勿毫無理由棄件，致使影響他人權益以外也會造成供應者困擾。如經管理者了解為惡意，管理者有權下架該品項甚至停權該用戶。</li>
+                            <li>相關規範如有未盡，本平台保有解釋闡述權。</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="terms-agreement">
+                        <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                        <label for="agreeTerms" class="required">我已詳細閱讀並同意上述用戶基本規約</label>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-button" id="submitBtn" disabled>提交註冊資料</button>
             
             <div class="form-footer">
                 <p>所有標記有 * 符號的欄位均為必填項目</p>
@@ -403,6 +475,23 @@
             
             // 初始狀態檢查
             toggleCharitySection();
+            
+            // 處理規約同意按鈕狀態
+            const agreeTermsCheckbox = document.getElementById('agreeTerms');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            function updateSubmitButtonState() {
+                if (agreeTermsCheckbox.checked) {
+                    submitBtn.disabled = false;
+                } else {
+                    submitBtn.disabled = true;
+                }
+            }
+            
+            agreeTermsCheckbox.addEventListener('change', updateSubmitButtonState);
+            
+            // 初始狀態檢查
+            updateSubmitButtonState();
             
             // 城市選擇後自動預填詳細地址（如果有地址欄位的話）
             const citySelect = document.getElementById('city');
@@ -480,7 +569,7 @@
                 const params = new URLSearchParams(window.location.search);
                 
                 // 遍歷表單中的所有input、select元素
-                document.querySelectorAll('#memberForm input:not([type="file"]), #memberForm select').forEach(element => {
+                document.querySelectorAll('#memberForm input:not([type="file"]):not([type="checkbox"]), #memberForm select').forEach(element => {
                     const paramValue = params.get(element.name);
                     if (paramValue) {
                         // 對於lineId欄位，即使是唯讀也允許通過URL設置
@@ -554,6 +643,11 @@
                 // 替換縣市選項值為中文
                 if (formData.get('city') && cityNames[formData.get('city')]) {
                     formData.set('city', cityNames[formData.get('city')]);
+                }
+                
+                // 處理規約同意狀態
+                if (formData.get('agreeTerms')) {
+                    formData.set('agreeTerms', '已同意');
                 }
                 
                 // 使用Fetch API提交表單到webhook
