@@ -372,7 +372,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="isCharityOrganization" class="required">是否為社福單位或學校</label>
+                    <label for="isCharityOrganization" class="required">是否為社福單位/社政單位/學校</label>
                     <div class="radio-group">
                         <div class="radio-option">
                             <input type="radio" id="isCharityYes" name="isCharityOrganization" value="yes">
@@ -384,16 +384,22 @@
                         </div>
                     </div>
                     <div class="info-note">
-                        註：社福單位或學校可以在第一領取時間優先領取家具
+                        註：社福單位/社政單位/學校可以在第一領取時間優先領取家具
                     </div>
+                </div>
+                
+                <!-- 新增推薦單位欄位 -->
+                <div class="form-group hidden-section" id="recommendationSection">
+                    <label for="recommendingUnit">推薦單位</label>
+                    <input type="text" id="recommendingUnit" name="recommendingUnit" placeholder="請輸入推薦單位名稱（選填）">
                 </div>
             </div>
             
             <div class="form-section hidden-section" id="charitySection">
-                <h2>社福單位或學校資料</h2>
+                <h2>社福單位/社政單位/學校資料</h2>
                 
                 <div class="form-group">
-                    <label for="charityName" class="required">社福單位/學校名稱</label>
+                    <label for="charityName" class="required">社福單位/社政單位/學校名稱</label>
                     <input type="text" id="charityName" name="charityName">
                 </div>
                 
@@ -425,7 +431,7 @@
                     <div class="terms-content">
                         <ol>
                             <li>登錄本平台之用戶資訊，僅供平台本身使用，也就是家具相關物資的供應、媒合、取件、使用管理、用戶行為研究，不做其他利用。</li>
-                            <li>本平台有優先機制，若為登記立案合法的社福單位或學校，視為具有優先預約取件的資格。</li>
+                            <li>本平台有優先機制，若為登記立案合法的社福單位/社政單位/學校，視為具有優先預約取件的資格。</li>
                             <li>用戶經預約取件，請勿毫無理由棄件，致使影響他人權益以外也會造成供應者困擾。如經管理者了解為惡意，管理者有權下架該品項甚至停權該用戶。</li>
                             <li>相關規範如有未盡，本平台保有解釋闡述權。</li>
                         </ol>
@@ -452,17 +458,20 @@
             const isCharityYes = document.getElementById('isCharityYes');
             const isCharityNo = document.getElementById('isCharityNo');
             const charitySection = document.getElementById('charitySection');
+            const recommendationSection = document.getElementById('recommendationSection');
             const charityRequiredFields = charitySection.querySelectorAll('input[type="text"], input[type="file"]');
             
             function toggleCharitySection() {
                 if (isCharityYes.checked) {
                     charitySection.classList.remove('hidden-section');
+                    recommendationSection.classList.add('hidden-section');
                     // 啟用必填驗證
                     charityRequiredFields.forEach(field => {
                         field.required = true;
                     });
                 } else {
                     charitySection.classList.add('hidden-section');
+                    recommendationSection.classList.remove('hidden-section');
                     // 停用必填驗證
                     charityRequiredFields.forEach(field => {
                         field.required = false;
